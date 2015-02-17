@@ -158,17 +158,49 @@ traits:
               example: |
                 {
                   "id": "54d8ae163sadg755c81a4",
-                  "author": "Cedric Liengme",
-                  "issueType": "54d8issueTypeadg755c81a4"
+                  "authorId": "baseURL/userId",
+                  "issueTypeId": "baseURL/issueType"
                   "description": "Lampadaire cassé",
                   "latitude": "40,689249400000000000",
                   "longitude": "-74,044500400000000000",
                   "status": "acknowledged",
-                  "staffmember": "54d8ae163fd30364605c81a4"
+                  "staffmemberId": "baseURL/userId",
                   "creatingDate": "2014-08-20 15:30:00",
                   "closingDate": "2014-09-20 15:30:00"
                 }
   post:
+    description: Create a new issue.
+    body:
+      application/json:
+        example: |
+          {
+            "authorId": "baseURL/userId",
+            "issueTypeId": "baseURL/issueType"
+            "description": "Lampadaire cassé",
+            "latitude": "40,689249400000000000",
+            "longitude": "-74,044500400000000000",
+            "status": "acknowledged",
+            "staffmemberId": "baseURL/userId",
+            "creatingDate": "2014-08-20 15:30:00",
+            "closingDate": "2014-09-20 15:30:00"
+          }
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+              {
+                "id": "54d8ae163sadg755c81a4",
+                "authorId": "baseURL/userId",
+                "issueTypeId": "baseURL/issueType"
+                "description": "Lampadaire cassé",
+                "latitude": "40,689249400000000000",
+                "longitude": "-74,044500400000000000",
+                "status": "acknowledged",
+                "staffmemberId": "baseURL/userId",
+                "creatingDate": "2014-08-20 15:30:00",
+                "closingDate": "2014-09-20 15:30:00"
+              }
 
   /{id}:
     description: User resource.
