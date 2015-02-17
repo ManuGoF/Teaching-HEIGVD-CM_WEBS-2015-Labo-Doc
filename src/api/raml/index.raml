@@ -121,6 +121,61 @@ traits:
         204:
           body:
 
+/issues:
+  description: Issue resource.
+  get:
+    is: [auth: { roles: 'staff' }]
+    description: Retrive the list of the users.
+    queryParameters:
+      sorting:
+        displayName: sorting
+        type: string
+        description: List ordering (ASC/DESC)
+        example: Not for the moment
+        required: false
+      paging:
+        displayName: paging
+        type: string
+        description: Manage the collection pagination
+        example: Not for the moment
+        required: false
+      filtering:
+        displayName: filtering
+        type: string
+        description: |
+          Criteria to filter data
+          - `userID` int, Criteria to list by a particular user (ID).
+          - `fromDate` datetime, Criteria to list from a date.
+          - `toDate` datetime, Criteria to list until a date.
+          - `resolved` boolean, Criteria to list resolved issues (TRUE or FALSE).
+          - `issueTypeId` int, Criteria to list by a certain issueType (ID).
+        example: Not for the moment
+        required: false
+    responses:
+      200:
+          body:
+            application/json:
+              example: |
+                {
+                  "id": "54d8ae163sadg755c81a4",
+                  "author": "Cedric Liengme",
+                  "issueType": "54d8issueTypeadg755c81a4"
+                  "description": "Lampadaire cassé",
+                  "latitude": "40,689249400000000000",
+                  "longitude": "-74,044500400000000000",
+                  "status": "acknowledged",
+                  "staffmember": "54d8ae163fd30364605c81a4"
+                  "creatingDate": "2014-08-20 15:30:00",
+                  "closingDate": "2014-09-20 15:30:00"
+                }
+  post:
+
+  /{id}:
+    description: User resource.
+    get:
+
+    post:
+
 /data:
   description: Data resource.
   /populate:
