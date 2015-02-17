@@ -12,7 +12,26 @@ traits:
   description: User resource.
   get:
     is: [auth: { roles: 'staff' }]
-    description: Retrive the list of the users.
+    description: Retrieve a list of users.
+    queryParameters:
+      sorting:
+        displayName: sorting
+        type: string
+        description: List ordering (ASC/DESC)
+        example: Not for the moment
+        required: false
+      paging:
+        displayName: paging
+        type: string
+        description: Manage the collection pagination
+        example: Not for the moment
+        required: false
+      filtering:
+        displayName: filtering
+        type: string
+        description: Criteria to filter data
+        example: Not for the moment
+        required: false
     responses:
       200:
         body:
@@ -67,11 +86,10 @@ traits:
                   "citizen"
                 ]
               }
-
   /{id}:
     get:
       is: [auth: {roles: 'any'} ]
-      description: Retrieve the details of a specific user.
+      description: Retrieve a user by its id.
       responses:
         200:
           body:
@@ -85,10 +103,10 @@ traits:
                   "roles": [
                     "citizen"
                   ]
-                }
+                }     
     put:
       is: [auth: {roles: 'staff'} ]
-      description: Update the details of a specific user.
+      description: Update a user specified by its id.
       body:
         application/json:
           example: |
@@ -116,7 +134,7 @@ traits:
                 }
     delete:
       is: [auth: {roles: 'staff'} ]
-      description: Delete a specific user.
+      description: Delete a user specified by its id.
       responses:
         204:
           body:
@@ -125,7 +143,7 @@ traits:
   description: Issue resource.
   get:
     is: [auth: { roles: 'staff' }]
-    description: Retrive the list of the users.
+    description: Retrieve a list of issues.
     queryParameters:
       sorting:
         displayName: sorting
@@ -156,18 +174,34 @@ traits:
           body:
             application/json:
               example: |
-                {
-                  "id": "54d8ae163sadg755c81a4",
-                  "authorId": "baseURL/userId",
-                  "issueTypeId": "baseURL/issueType"
-                  "description": "Lampadaire cassé",
-                  "latitude": "40,689249400000000000",
-                  "longitude": "-74,044500400000000000",
-                  "status": "acknowledged",
-                  "staffmemberId": "baseURL/userId",
-                  "creatingDate": "2014-08-20 15:30:00",
-                  "closingDate": "2014-09-20 15:30:00"
-                }
+                [
+                  {
+                    "id": "54d8ae163sadg755c81a4",
+                    "authorId": "baseURL/userId",
+                    "issueTypeId": "baseURL/issueType",
+                    "description": "Lampadaire cassé",
+                    "latitude": "40,689249400000000000",
+                    "longitude": "-74,044500400000000000",
+                    "status": "acknowledged",
+                    "staffmemberId": "baseURL/userId",
+                    "creatingDate": "2014-08-20 15:30:00",
+                    "closingDate": "2014-09-20 15:30:00"
+                  },
+                  {
+                    "id": "54d8ae163sadg75dasd81a4",
+                    "authorId": "baseURL/userId",
+                    "issueTypeId": "baseURL/issueType",
+                    "description": "Lampadaire cassé",
+                    "latitude": "40,689249400000000000",
+                    "longitude": "-74,044500400000000000",
+                    "status": "acknowledged",
+                    "staffmemberId": "baseURL/userId",
+                    "creatingDate": "2014-08-20 15:30:00",
+                    "closingDate": "2014-09-20 15:30:00"
+                  },
+                  ...
+                ]
+
   post:
     description: Create a new issue.
     body:
@@ -175,7 +209,7 @@ traits:
         example: |
           {
             "authorId": "baseURL/userId",
-            "issueTypeId": "baseURL/issueType"
+            "issueTypeId": "baseURL/issueType",
             "description": "Lampadaire cassé",
             "latitude": "40,689249400000000000",
             "longitude": "-74,044500400000000000",
@@ -192,7 +226,7 @@ traits:
               {
                 "id": "54d8ae163sadg755c81a4",
                 "authorId": "baseURL/userId",
-                "issueTypeId": "baseURL/issueType"
+                "issueTypeId": "baseURL/issueType",
                 "description": "Lampadaire cassé",
                 "latitude": "40,689249400000000000",
                 "longitude": "-74,044500400000000000",
@@ -203,10 +237,216 @@ traits:
               }
 
   /{id}:
-    description: User resource.
     get:
+      is: [auth: {roles: 'any'} ]
+      description: Retrieve an issue specified by its id.
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "id": "54d8ae163sadg755c81a4",
+                  "authorId": "baseURL/userId",
+                  "issueTypeId": "baseURL/issueType",
+                  "description": "Lampadaire cassé",
+                  "latitude": "40,689249400000000000",
+                  "longitude": "-74,044500400000000000",
+                  "status": "acknowledged",
+                  "staffmemberId": "baseURL/userId",
+                  "creatingDate": "2014-08-20 15:30:00",
+                  "closingDate": "2014-09-20 15:30:00"
+                }
+    put:
+      is: [auth: {roles: 'staff'} ]
+      description: Update an issue specified by its id.
+      body:
+        application/json:
+          example: |
+            {
+              "authorId": "baseURL/userId",
+              "issueTypeId": "baseURL/issueType",
+              "description": "Lampadaire cassé",
+              "latitude": "40,689249400000000000",
+              "longitude": "-74,044500400000000000",
+              "status": "acknowledged",
+              "staffmemberId": "baseURL/userId",
+              "creatingDate": "2014-08-20 15:30:00",
+              "closingDate": "2014-09-20 15:30:00"
+            }
+      responses:
+        200:
+          body: 
+            application/json:
+              example: |
+                {
+                  "id": "54d8ae163sadg755c81a4",
+                  "authorId": "baseURL/userId",
+                  "issueTypeId": "baseURL/issueType",
+                  "description": "Lampadaire cassé",
+                  "latitude": "40,689249400000000000",
+                  "longitude": "-74,044500400000000000",
+                  "status": "acknowledged",
+                  "staffmemberId": "baseURL/userId",
+                  "creatingDate": "2014-08-20 15:30:00",
+                  "closingDate": "2014-09-20 15:30:00"
+                }
+    delete:
+      is: [auth: {roles: 'staff'} ]
+      description: Delete an issue specified by its id.
+      responses:
+        204:
+          body:
 
-    post:
+    /actions:
+      get:
+        is: [auth: { roles: 'staff' }]
+        description: Retrieve a list of actions specified by an issue.
+        queryParameters:
+          sorting:
+            displayName: sorting
+            type: string
+            description: List ordering (ASC/DESC)
+            example: Not for the moment
+            required: false
+          paging:
+            displayName: paging
+            type: string
+            description: Manage the collection pagination
+            example: Not for the moment
+            required: false
+          filtering:
+            displayName: filtering
+            type: string
+            description: |
+              Criteria to filter data
+              - `userID` int, Criteria to list by a particular user (ID).
+              - `fromDate` datetime, Criteria to list from a date.
+              - `toDate` datetime, Criteria to list until a date.
+              - `resolved` boolean, Criteria to list resolved issues (TRUE or FALSE).
+              - `issueTypeId` int, Criteria to list by a certain issueType (ID).
+            example: Not for the moment
+            required: false
+        responses:
+          200:
+              body:
+                application/json:
+                  example: |
+                    {
+
+                    }
+      post:
+        description: Create an action for an issue.
+        body:
+          application/json:
+            example: |
+              {
+
+              }
+        responses:
+          201:
+            body:
+              application/json:
+                example: |
+                  {
+
+                  }
+
+/issueType:
+  description: IssueType resource.
+  get:
+    is: [auth: { roles: 'staff' }]
+    description: Retrieve a list of issueTypes.
+    queryParameters:
+      sorting:
+        displayName: sorting
+        type: string
+        description: List ordering (ASC/DESC)
+        example: Not for the moment
+        required: false
+      paging:
+        displayName: paging
+        type: string
+        description: Manage the collection pagination
+        example: Not for the moment
+        required: false
+      filtering:
+        displayName: filtering
+        type: string
+        description: Criteria to filter data
+        example: Not for the moment
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              [
+                {
+                  "id": "54d8ae163fd303634505c81a4"
+                },
+                {
+                  "id": "54d8aedsadfd30364605c81a9"
+                },
+                ...
+              ]
+  post:
+    description: Create a new issueType.
+    body:
+      application/json:
+        example: |
+          {
+
+          }
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+              {
+                "id": "54d8ae163fd30364605c81a4",
+                "firstname": "Romain",
+                "lastname": "Terieur",
+                "phone": "+6624582",
+                "roles": [
+                  "citizen"
+                ]
+              }
+  /{id}:
+    get:
+      is: [auth: {roles: 'any'} ]
+      description: Retrieve a issueType by its id.
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "id": "54d8ae163fd303634505c81a4"
+                }     
+    put:
+      is: [auth: {roles: 'staff'} ]
+      description: Update a issueType specified by its id.
+      body:
+        application/json:
+          example: |
+            {
+
+            }
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+
+                }
+    delete:
+      is: [auth: {roles: 'staff'} ]
+      description: Delete a issueType specified by its id.
+      responses:
+        204:
+          body:
 
 /data:
   description: Data resource.
@@ -216,3 +456,4 @@ traits:
       responses:
         200:
           body:
+
