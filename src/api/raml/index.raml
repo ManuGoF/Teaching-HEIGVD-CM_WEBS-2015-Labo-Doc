@@ -380,10 +380,14 @@ traits:
             example: |
               [
                 {
-                  "id": "54d8ae163fd303634505c81a4"
+                  "id": "54d8ae163fd303634505c81a4",
+                  "shortname": "Panne",
+                  "description": "Panne du matériel public"
                 },
                 {
-                  "id": "54d8aedsadfd30364605c81a9"
+                  "id": "54d8aedsadfd30364605c81a9",
+                  "shortname": "Casse",
+                  "description": "Matériel public cassé"
                 },
                 ...
               ]
@@ -393,7 +397,8 @@ traits:
       application/json:
         example: |
           {
-
+            "shortname": "Casse",
+            "description": "Matériel public cassé"    
           }
     responses:
       201:
@@ -401,13 +406,9 @@ traits:
           application/json:
             example: |
               {
-                "id": "54d8ae163fd30364605c81a4",
-                "firstname": "Romain",
-                "lastname": "Terieur",
-                "phone": "+6624582",
-                "roles": [
-                  "citizen"
-                ]
+                "id": "54d8aedsadfd30364605c81a9",
+                "shortname": "Casse",
+                "description": "Matériel public cassé"
               }
   /{id}:
     get:
@@ -419,7 +420,9 @@ traits:
             application/json:
               example: |
                 {
-                  "id": "54d8ae163fd303634505c81a4"
+                  "id": "54d8ae163fd303634505c81a4",
+                  "shortname": "Panne",
+                  "description": "Panne du matériel public"
                 }     
     put:
       is: [auth: {roles: 'staff'} ]
@@ -428,7 +431,8 @@ traits:
         application/json:
           example: |
             {
-
+              "shortname": "Panne",
+              "description": "Panne du matériel public"
             }
       responses:
         200:
@@ -436,7 +440,9 @@ traits:
             application/json:
               example: |
                 {
-
+                  "id": "54d8ae163fd303634505c81a4",
+                  "shortname": "Panne",
+                  "description": "Panne du matériel public"
                 }
     delete:
       is: [auth: {roles: 'staff'} ]
