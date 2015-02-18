@@ -1,4 +1,5 @@
-*Projet dans le cadre du cours Webservices par Emmanuel Bezençon et Cedric Liengme*
+Projet dans le cadre du cours Webservices par Emmanuel Bezençon et Cedric Liengme
+
 URL Heroku: https://ancient-castle-6925.herokuapp.com/
 
 # Smart City - Citizen Engagement - Doc Skeleton
