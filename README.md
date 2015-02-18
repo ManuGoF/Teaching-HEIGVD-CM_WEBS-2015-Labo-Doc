@@ -1,3 +1,5 @@
+Projet dans le cadre du cours Webservices par Emmanuel Bezençon et Cedric Liengme
+
 # Smart City - Citizen Engagement - Doc Skeleton
 
 *Documentation of the API of the Citizen Engagement*
