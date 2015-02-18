@@ -330,7 +330,10 @@ traits:
                 application/json:
                   example: |
                     {
-
+                      "id": "54d8ae163fd30364605c81a4",
+                      "type": "addComment",
+                      "description": "Ajout d'un commentaire",
+                      "datetime": "2014-08-20 15:30:00"
                     }
       post:
         description: Create an action for an issue.
@@ -338,7 +341,9 @@ traits:
           application/json:
             example: |
               {
-
+                "type": "addComment",
+                "description": "Ajout d'un commentaire",
+                "datetime": "2014-08-20 15:30:00"
               }
         responses:
           201:
@@ -346,7 +351,10 @@ traits:
               application/json:
                 example: |
                   {
-
+                    "id": "54d8ae163fd30364605c81a4",
+                    "type": "addComment",
+                    "description": "Ajout d'un commentaire",
+                    "datetime": "2014-08-20 15:30:00"
                   }
 
 /issueType:
@@ -456,25 +464,6 @@ traits:
   get:
     is: [auth: { roles: 'staff' }]
     description: Retrieve a list of actions.
-    queryParameters:
-      sorting:
-        displayName: sorting
-        type: string
-        description: List ordering (ASC/DESC)
-        example: Not for the moment
-        required: false
-      paging:
-        displayName: paging
-        type: string
-        description: Manage the collection pagination
-        example: Not for the moment
-        required: false
-      filtering:
-        displayName: filtering
-        type: string
-        description: Criteria to filter data
-        example: Not for the moment
-        required: false
     responses:
       200:
         body:
@@ -482,10 +471,16 @@ traits:
             example: |
               [
                 {
-                  "id": "54d8ae163fd345634505c81a4"
+                  "id": "54d8ae163fd30364605c81a4",
+                  "type": "addComment",
+                  "description": "Ajout d'un commentaire",
+                  "datetime": "2014-08-20 15:30:00"
                 },
                 {
-                  "id": "54d8aedsad9830364605c81a9"
+                  "id": "54d8ae163fd30364605c81a4",
+                  "type": "addTag",
+                  "description": "Ajout d'un tag",
+                  "datetime": "2014-08-20 15:40:00"
                 },
                 ...
               ]
