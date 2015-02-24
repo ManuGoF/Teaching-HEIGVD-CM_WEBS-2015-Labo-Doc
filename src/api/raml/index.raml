@@ -149,47 +149,71 @@ traits:
       The parameters that content as an Object receive the ID of this Object and not its content. 
       This service doesn't return the list of tags and comments. This is when calling a special Issue (by ID) that such informations is returned.
     queryParameters:
-      paging:
+      ps:
         displayName: ps
         type: string
         description: limit de number of results by page
         example: issues?ps=1
         required: false
-      paging1:
+      p:
         displayName: p
         type: string
         description: go to the page
         example: issues?p=8
         required: false
-      filtering:
+      author:
         displayName: author
         type: string
         description: filtering by author ID
         example: issues?author=54d8ae163sadg7555781a4
         required: false
-      filtering1:
+      issueType:
         displayName: issueType
         type: string
         description: filtering by issueType ID
         example: issues?issueType=54d8ae163sadg7555781a4
         required: false
-      filtering2:
+      fromDate:
         displayName: fromDate
         type: string
         description: filtering from a date
         example: issues?fromDate=2014-09-20
         required: false
-      filtering3:
+      toDate:
         displayName: toDate
         type: string
         description: filtering until a date
         example: issues?toDate=2014-10-20
         required: false
-      filtering4:
+      solved:
         displayName: solved
         type: boolean
         description: filtering by solved issue
         example: issues?solved=true
+        required: false
+      sorting:
+        displayName: sorting
+        type: string
+        description: List ordering (ASC/DESC)
+        example: Not for the moment
+        required: false
+      paging:
+        displayName: paging
+        type: string
+        description: Manage the collection pagination
+        example: Not for the moment
+        required: false
+      filtering:
+        displayName: filtering
+        type: string
+        description: |
+          Criteria to filter data
+          - `userID` int, Criteria to list by a particular user (ID).
+          - `fromDate` datetime, Criteria to list from a date.
+          - `toDate` datetime, Criteria to list until a date.
+          - `resolved` boolean, Criteria to list resolved issues (TRUE or FALSE).
+          - `issueTypeId` int, Criteria to list by a certain issueType (ID).
+        example: Not for the moment
         required: false
     responses:
       200:
