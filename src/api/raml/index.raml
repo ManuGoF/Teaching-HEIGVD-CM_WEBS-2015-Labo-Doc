@@ -15,23 +15,23 @@ traits:
     is: [auth: { roles: 'staff' }]
     description: Retrieve a list of users.
     queryParameters:
-      sorting:
-        displayName: sorting
+      search:
+        displayName: search
+        type: string
+        description: Searching a word into the content of his parameters. 
+        example: users?search=Thomas
+        required: false
+      order:
+        displayName: order
         type: string
         description: List ordering (ASC/DESC)
-        example: Not for the moment
+        example: users?order=ASC
         required: false
-      paging:
-        displayName: paging
+      by:
+        displayName: by
         type: string
-        description: Manage the collection pagination
-        example: Not for the moment
-        required: false
-      filtering:
-        displayName: filtering
-        type: string
-        description: Criteria to filter data
-        example: Not for the moment
+        description: Ordering by parameter
+        example: users?by=firstname
         required: false
     responses:
       200:
