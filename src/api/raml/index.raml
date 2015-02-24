@@ -199,25 +199,25 @@ traits:
                 [
                   {
                     "id": "54d8ae163sadg755c81a4",
-                    "author": "http://localhost/api/users/{id}",
-                    "issueType": "http://localhost/api/issueType/{id}",
+                    "author": "54d8ae163sadg7555781a4",
+                    "issueType": "54d8ae163sadg7555781a4",
                     "description": "Lampadaire cassé",
                     "latitude": "40,689249400000000000",
                     "longitude": "-74,044500400000000000",
                     "status": "acknowledged",
-                    "staffmember": "http://localhost/api/users/{id}",
+                    "staffmember": "54d8ae163sadg7555781a4",
                     "creatingDate": "2014-08-20 15:30:00",
                     "closingDate": "2014-09-20 15:30:00"
                   },
                   {
                     "id": "54d8ae163sadg7555781a4",
-                    "author": "http://localhost/api/users/{id}",
-                    "issueType": "http://localhost/api/issueType/{id}",
-                    "description": "Lampadaire cassé",
+                    "author": "54d8ae163sadg7555781a4",
+                    "issueType": "54d8ae163sadg7555781a4",
+                    "description": "Lampadaire tombé",
                     "latitude": "40,689249400000000000",
                     "longitude": "-74,044500400000000000",
                     "status": "created",
-                    "staffmember": "http://localhost/api/users/{id}",
+                    "staffmember": "54d8ae163sadg7555781a4",
                     "creatingDate": "2014-08-20 15:30:00",
                     "closingDate": "2014-09-20 15:30:00"
                   },
@@ -260,7 +260,10 @@ traits:
   /{id}:
     get:
       is: [auth: {roles: 'any'} ]
-      description: Retrieve an issue specified by its id.
+      description: |
+        Retrieve an issue specified by its id.
+        This service returns all parameters of the Issue.
+        For all parameters that contain an object, the whole object is returned.
       responses:
         200:
           body:
@@ -280,17 +283,20 @@ traits:
                 }
     put:
       is: [auth: {roles: 'staff'} ]
-      description: Update an issue specified by its id.
+      description: |
+        Update an issue specified by its id.
+        All parameters are updated, except the ID, comments, tags and creatingDate.
+        It's necessary to put all parameters to the body .
       body:
         application/json:
           example: |
             {
               "author": "http://localhost/api/users/{id}",
               "issueType": "http://localhost/api/issueType/{id}",
-              "description": "Lampadaire cassé",
+              "description": "Lampadaire non plus déféctueux mais araché par un jeune délinquant.",
               "latitude": "40,689249400000000000",
               "longitude": "-74,044500400000000000",
-              "status": "acknowledged",
+              "status": "created",
               "staffmember": "http://localhost/api/users/{id}",
               "closingDate": "2014-09-20 15:30:00"
             }
@@ -303,10 +309,10 @@ traits:
                   "id": "54d8ae163sadg7555781a4",
                   "author": "http://localhost/api/users/{id}",
                   "issueType": "http://localhost/api/issueType/{id}",
-                  "description": "Lampadaire cassé",
+                  "description": "Lampadaire non plus déféctueux mais araché par un jeune délinquant.",
                   "latitude": "40,689249400000000000",
                   "longitude": "-74,044500400000000000",
-                  "status": "acknowledged",
+                  "status": "created",
                   "staffmember": "http://localhost/api/users/{id}",
                   "creatingDate": "2014-08-20 15:30:00",
                   "closingDate": "2014-09-20 15:30:00"
@@ -385,23 +391,23 @@ traits:
     is: [auth: { roles: 'staff' }]
     description: Retrieve a list of issueTypes.
     queryParameters:
-      sorting:
-        displayName: sorting
+      search:
+        displayName: search
+        type: string
+        description: Searching a word into the content of his parameters. 
+        example: issuetypes?search=Highway
+        required: false
+      order:
+        displayName: order
         type: string
         description: List ordering (ASC/DESC)
-        example: Not for the moment
+        example: issuetypes?order=ASC
         required: false
-      paging:
-        displayName: paging
+      by:
+        displayName: by
         type: string
-        description: Manage the collection pagination
-        example: Not for the moment
-        required: false
-      filtering:
-        displayName: filtering
-        type: string
-        description: Criteria to filter data
-        example: Not for the moment
+        description: Ordering by parameter
+        example: issuetypes?by=shortname
         required: false
     responses:
       200:
@@ -456,7 +462,10 @@ traits:
                 }     
     put:
       is: [auth: {roles: 'staff'} ]
-      description: Update a issueType specified by its id.
+      description: |
+        Update a issueType specified by its id.
+        All parameters are updated, except the ID.
+        It's necessary to put all parameters to the body.
       body:
         application/json:
           example: |
