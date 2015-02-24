@@ -191,30 +191,6 @@ traits:
         description: filtering by solved issue
         example: issues?solved=true
         required: false
-      sorting:
-        displayName: sorting
-        type: string
-        description: List ordering (ASC/DESC)
-        example: Not for the moment
-        required: false
-      paging:
-        displayName: paging
-        type: string
-        description: Manage the collection pagination
-        example: Not for the moment
-        required: false
-      filtering:
-        displayName: filtering
-        type: string
-        description: |
-          Criteria to filter data
-          - `userID` int, Criteria to list by a particular user (ID).
-          - `fromDate` datetime, Criteria to list from a date.
-          - `toDate` datetime, Criteria to list until a date.
-          - `resolved` boolean, Criteria to list resolved issues (TRUE or FALSE).
-          - `issueTypeId` int, Criteria to list by a certain issueType (ID).
-        example: Not for the moment
-        required: false
     responses:
       200:
           body:
@@ -240,7 +216,7 @@ traits:
                     "description": "Lampadaire cassé",
                     "latitude": "40,689249400000000000",
                     "longitude": "-74,044500400000000000",
-                    "status": "acknowledged",
+                    "status": "created",
                     "staffmember": "http://localhost/api/users/{id}",
                     "creatingDate": "2014-08-20 15:30:00",
                     "closingDate": "2014-09-20 15:30:00"
@@ -249,7 +225,10 @@ traits:
                 ]
 
   post:
-    description: Create a new issue.
+    description: |
+      Create a new issue.
+      The status is automatically "created " with the creation of the Issue and the staffmember is not assigned. 
+      An action " updateStaffmember " is available to associate a staffmember (issue/{id}/action/updateStaffmember).
     body:
       application/json:
         example: |
@@ -258,9 +237,7 @@ traits:
             "issueType": "http://localhost/api/issueType/{id}",
             "description": "Lampadaire cassé",
             "latitude": "40,689249400000000000",
-            "longitude": "-74,044500400000000000",
-            "status": "acknowledged",
-            "staffmember": "http://localhost/api/users/{id}",
+            "longitude": "-74,044500400000000000"
           }
     responses:
       201:
@@ -274,8 +251,8 @@ traits:
                 "description": "Lampadaire cassé",
                 "latitude": "40,689249400000000000",
                 "longitude": "-74,044500400000000000",
-                "status": "acknowledged",
-                "staffmember": "http://localhost/api/users/{id}",
+                "status": "created",
+                "staffmember": "null",
                 "creatingDate": "2014-08-20 15:30:00",
                 "closingDate": "2014-09-20 15:30:00"
               }
