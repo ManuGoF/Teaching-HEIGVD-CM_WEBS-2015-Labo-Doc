@@ -336,13 +336,43 @@ traits:
               example: |
                 {
                   "id": "54d8ae163sadg7555781a4",
-                  "author": "http://localhost/api/users/{id}",
-                  "issueType": "http://localhost/api/issueType/{id}",
+                  "author": {
+                      "id": "54e74d7aef63f4be494c3e70",
+                      "firstname": "Alain",
+                      "lastname": "Dutoit",
+                      "phone": "+7634763",
+                      "roles": [
+                          "staff"
+                      ]
+                  },
+                  "issueType": {
+                      "id": "54e74d7aef63f4be494c3e7a",
+                      "shortname": "dangerous population",
+                      "description": "Nam semper ligula quis nisl egestas, at pellentesque nunc tincidunt."
+                  },
                   "description": "Lampadaire non plus déféctueux mais araché par un jeune délinquant.",
                   "latitude": "40,689249400000000000",
                   "longitude": "-74,044500400000000000",
                   "status": "created",
-                  "staffmember": "http://localhost/api/users/{id}",
+                  "staffmember": {
+                      "id": "54e74d7aef63f4be494c3e70",
+                      "firstname": "Alain",
+                      "lastname": "Dutoit",
+                      "phone": "+7634763",
+                      "roles": [
+                          "staff"
+                      ]
+                  },
+                  "comments": [
+                      {
+                          "id": "54e74d7aef63f4be494c3e89",
+                          "author": "54e74d7aef63f4be494c3e77",
+                          "comment": "Nunc sollicitudin lorem at dolor placerat, eget ornare erat fringilla."
+                      }
+                  ],
+                  "tags": [
+                      "Orci"
+                  ],
                   "creatingDate": "2014-08-20 15:30:00",
                   "closingDate": "2014-09-20 15:30:00"
                 }
