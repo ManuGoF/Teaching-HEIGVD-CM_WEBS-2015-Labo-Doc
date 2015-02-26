@@ -140,6 +140,370 @@ traits:
         204:
           body:
 
+/issues:
+  description: Issue resource.
+  get:
+    is: [auth: { roles: 'staff' }]
+    description: |
+      Retrieve a list of issues. 
+      The parameters that content as an Object receive the ID of this Object and not its content. 
+      This service doesn't return the list of tags and comments. This is when calling a special Issue (by ID) that such informations is returned.
+      This service doesn't return closingDate parameter when it's empty.
+    queryParameters:
+      ps:
+        displayName: ps
+        type: string
+        description: limit de number of results by page
+        example: issues?ps=1
+        required: false
+      p:
+        displayName: p
+        type: string
+        description: go to the page
+        example: issues?p=8
+        required: false
+      author:
+        displayName: author
+        type: string
+        description: filtering by author ID
+        example: issues?author=54d8ae163sadg7555781a4
+        required: false
+      issueType:
+        displayName: issueType
+        type: string
+        description: filtering by issueType ID
+        example: issues?issueType=54d8ae163sadg7555781a4
+        required: false
+      fromDate:
+        displayName: fromDate
+        type: string
+        description: filtering from a date
+        example: issues?fromDate=2014-09-20
+        required: false
+      toDate:
+        displayName: toDate
+        type: string
+        description: filtering until a date
+        example: issues?toDate=2014-10-20
+        required: false
+      solved:
+        displayName: solved
+        type: boolean
+        description: filtering by solved issue
+        example: issues?solved=true
+        required: false
+      lat:
+        displayName: lat
+        type: string
+        description: latitude of the center of the point of a zone (both lat long and radius are required to filter by zone)
+        example: issues?lat=46.3839140&long=6.2446560&radius=5000
+        required: false
+      long:
+        displayName: long
+        type: string
+        description: longitude of the center of the point of a zone (both lat long and radius are required to filter by zone)
+        example: issues?lat=46.3839140&long=6.2446560&radius=5000
+        required: false
+      radius:
+        displayName: radius
+        type: string
+        description: radius of a zone in meters (both lat long and radius are required to filter by zone)
+        example: issues?lat=46.3839140&long=6.2446560&radius=5000
+        required: false
+    responses:
+      200:
+          body:
+            application/json:
+              example: |
+                [
+                  {
+                    "id": "54d8ae163sadg755c81a4",
+                    "author": "54d8ae163sadg7555781a4",
+                    "issueType": "54d8ae163sadg7555781a4",
+                    "description": "Lampadaire cassé",
+                    "latitude": "40,689249400000000000",
+                    "longitude": "-74,044500400000000000",
+                    "status": "acknowledged",
+                    "staffmember": "54d8ae163sadg7555781a4",
+                    "creatingDate": "2014-08-20 15:30:00",
+                    "closingDate": "2014-09-20 15:30:00"
+                  },
+                  {
+                    "id": "54d8ae163sadg7555781a4",
+                    "author": "54d8ae163sadg7555781a4",
+                    "issueType": "54d8ae163sadg7555781a4",
+                    "description": "Lampadaire tombé",
+                    "latitude": "40,689249400000000000",
+                    "longitude": "-74,044500400000000000",
+                    "status": "created",
+                    "staffmember": "54d8ae163sadg7555781a4",
+                    "creatingDate": "2014-08-20 15:30:00",
+                  },
+                  ...
+                ]
+
+  post:
+    description: |
+      Create a new issue.
+      The status is automatically "created " with the creation of the Issue and the staffmember is not assigned. 
+      An action " updateStaffmember " is available to associate a staffmember (issues/{id}/action/updateStaffmember).
+    body:
+      application/json:
+        example: |
+          {
+            "author": "http://localhost/api/users/{id}",
+            "issueType": "http://localhost/api/issuetypes/{id}",
+            "description": "Lampadaire cassé",
+            "latitude": "40,689249400000000000",
+            "longitude": "-74,044500400000000000"
+          }
+    responses:
+      201:
+        body:
+          application/json:
+            example: |
+              {
+                  "id": "54d8ae163sadg7555781a4",
+                  "author": {
+                      "id": "54e74d7aef63f4be494c3e77",
+                      "firstname": "Benoit",
+                      "lastname": "Dutoit",
+                      "phone": "+3386207",
+                      "roles": [
+                          "citizen",
+                          "staff"
+                      ]
+                  },
+                  "issueType": {
+                      "id": "54e74d7aef63f4be494c3e7f",
+                      "shortname": "dangerous crossroad",
+                      "description": "Morbi a odio cursus, finibus lorem ut, pellentesque elit."
+                  },
+                  "description": "Changement",
+                  "latitude": "40,689249400000000000",
+                  "longitude": "-74,044500400000000000",
+                  "status": "created",
+                  "comments": [],
+                  "tags": [],
+                  "creatingDate": "2015-02-26T12:34:52.925Z"
+              }
+
+  /{id}:
+    get:
+      is: [auth: {roles: 'any'} ]
+      description: |
+        Retrieve an issue specified by its id.
+        This service returns all the Issue parameters, except closingDate if it hasn't been defined.
+        For all parameters that contain an object, the whole object is returned.
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "id": "54e74d7aef63f4be494c3eb6",
+                  "author": {
+                      "id": "54e74d7aef63f4be494c3e70",
+                      "firstname": "Alain",
+                      "lastname": "Dutoit",
+                      "phone": "+7634763",
+                      "roles": [
+                          "staff"
+                      ]
+                  },
+                  "issueType": {
+                      "id": "54e74d7aef63f4be494c3e7a",
+                      "shortname": "dangerous population",
+                      "description": "Nam semper ligula quis nisl egestas, at pellentesque nunc tincidunt."
+                  },
+                  "description": "Nam semper ligula quis nisl egestas, at pellentesque nunc tincidunt.",
+                  "latitude": "48.784234",
+                  "longitude": "7.622009",
+                  "status": "acknowledged",
+                  "staffmember": {
+                      "id": "54e74d7aef63f4be494c3e70",
+                      "firstname": "Alain",
+                      "lastname": "Dutoit",
+                      "phone": "+7634763",
+                      "roles": [
+                          "staff"
+                      ]
+                  },
+                  "comments": [
+                      {
+                          "id": "54e74d7aef63f4be494c3e89",
+                          "date": "2015-02-25T13:57:31.205Z",
+                          "author": "54e74d7aef63f4be494c3e77",
+                          "comment": "Nunc sollicitudin lorem at dolor placerat, eget ornare erat fringilla."
+                      }
+                  ],
+                  "tags": [
+                      "Orci"
+                  ],
+                  "creatingDate": "2015-02-20T15:06:34.481Z"
+                }
+    put:
+      is: [auth: {roles: 'staff'} ]
+      description: |
+        Update an issue specified by its id.
+        All parameters are updated, except the ID, comments, tags and creatingDate.
+        It's necessary to put all parameters to the body .
+      body:
+        application/json:
+          example: |
+            {
+              "author": "http://localhost/api/users/{id}",
+              "issueType": "http://localhost/api/issuetypes/{id}",
+              "description": "Lampadaire non plus déféctueux mais araché par un jeune délinquant.",
+              "latitude": "40,689249400000000000",
+              "longitude": "-74,044500400000000000",
+              "status": "created",
+              "staffmember": "http://localhost/api/users/{id}",
+              "closingDate": "2014-09-20 15:30:00"
+            }
+      responses:
+        200:
+          body: 
+            application/json:
+              example: |
+                {
+                  "id": "54d8ae163sadg7555781a4",
+                  "author": {
+                      "id": "54e74d7aef63f4be494c3e70",
+                      "firstname": "Alain",
+                      "lastname": "Dutoit",
+                      "phone": "+7634763",
+                      "roles": [
+                          "staff"
+                      ]
+                  },
+                  "issueType": {
+                      "id": "54e74d7aef63f4be494c3e7a",
+                      "shortname": "dangerous population",
+                      "description": "Nam semper ligula quis nisl egestas, at pellentesque nunc tincidunt."
+                  },
+                  "description": "Lampadaire non plus déféctueux mais araché par un jeune délinquant.",
+                  "latitude": "40,689249400000000000",
+                  "longitude": "-74,044500400000000000",
+                  "status": "created",
+                  "staffmember": {
+                      "id": "54e74d7aef63f4be494c3e70",
+                      "firstname": "Alain",
+                      "lastname": "Dutoit",
+                      "phone": "+7634763",
+                      "roles": [
+                          "staff"
+                      ]
+                  },
+                  "comments": [
+                      {
+                          "id": "54e74d7aef63f4be494c3e89",
+                          "date": "2015-02-25T13:57:31.205Z",
+                          "author": "54e74d7aef63f4be494c3e77",
+                          "comment": "Nunc sollicitudin lorem at dolor placerat, eget ornare erat fringilla."
+                      }
+                  ],
+                  "tags": [
+                      "Orci"
+                  ],
+                  "creatingDate": "2014-08-20 15:30:00",
+                  "closingDate": "2014-09-20 15:30:00"
+                }
+    delete:
+      is: [auth: {roles: 'staff'} ]
+      description: Delete an issue specified by its id.
+      responses:
+        204:
+          body:
+
+      post:
+        description: |
+        Create an action for an issue.
+        There are three types of actions: addComment , addtag ​​, updateStatus and updateStaffmember.
+        body:
+          application/json:
+            example: |
+              {
+                "type": "addComment",
+                "content":  {
+                              "comment": "hello world", 
+                              "author": "54d8ae163fd11114605c81a4"
+                            }
+              },
+              {
+                "type": "addTag",
+                "content":  {
+                              "tag": "great"
+                            }
+              },
+              {
+                "type": "updateStatus",
+                "content":  {
+                              "newStatus": "solved"
+                            }
+              },
+              {
+                "type": "updateStaffmember",
+                "content":  {
+                              "newStaffmember": "54d8ae163fd11114605c81a4"
+                            }
+              }
+        responses:
+          201:
+            body:
+              application/json:
+                example: |
+                  {
+                      "id": "54e74d7aef63f4be494c3eae",
+                      "author": {
+                          "id": "54e74d7aef63f4be494c3e6a",
+                          "firstname": "Alfred",
+                          "lastname": "Ducroc",
+                          "phone": "+5825041",
+                          "roles": [
+                              "citizen"
+                          ]
+                      },
+                      "issueType": {
+                          "id": "54e74d7aef63f4be494c3e81",
+                          "shortname": "graffiti",
+                          "description": "Proin ac mi et turpis volutpat facilisis id eget est."
+                      },
+                      "description": "Sed eget ipsum sit amet lacus dictum porttitor at facilisis velit.",
+                      "latitude": "49.784234",
+                      "longitude": "8.622009",
+                      "status": "solved",
+                      "staffmember": {
+                          "id": "54e74d7aef63f4be494c3e77",
+                          "firstname": "Benoit",
+                          "lastname": "Dutoit",
+                          "phone": "+3386207",
+                          "roles": [
+                              "citizen",
+                              "staff"
+                          ]
+                      },
+                      "comments": [
+                          {
+                              "id": "54e74d7aef63f4be494c3e82",
+                              "date": "2015-02-20T15:06:34.445Z",
+                              "author": "54e74d7aef63f4be494c3e76",
+                              "comment": "Sed id ligula semper, auctor metus et, mattis tortor."
+                          },
+                          {
+                              "id": "54ef1c8280d7c16b0441f89b",
+                              "date": "2015-02-26T13:15:46.424Z",
+                              "author": "54d8ae163fd11114605c81a4",
+                              "comment": "Réalisation des tests OK"
+                          }
+                      ],
+                      "tags": [
+                          "Lobortis",
+                          "great"
+                      ],
+                      "creatingDate": "2015-02-20T15:06:34.481Z"
+                  }
+
 /issueType:
   description: IssueType resource.
   get:
