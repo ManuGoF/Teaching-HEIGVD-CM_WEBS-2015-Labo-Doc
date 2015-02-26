@@ -549,30 +549,13 @@ traits:
                       "creatingDate": "2015-02-20T15:06:34.481Z"
                   }
 
-/issueType:
-  description: IssueType resource.
+
+
+/actions:
+  description: Actions resource
   get:
     is: [auth: { roles: 'staff' }]
-    description: Retrieve a list of issueTypes.
-    queryParameters:
-      search:
-        displayName: search
-        type: string
-        description: Searching a word into the content of his parameters. 
-        example: issuetypes?search=Highway
-        required: false
-      order:
-        displayName: order
-        type: string
-        description: List ordering (ASC/DESC)
-        example: issuetypes?order=ASC
-        required: false
-      by:
-        displayName: by
-        type: string
-        description: Ordering by parameter
-        example: issuetypes?by=shortname
-        required: false
+    description: Retrieve a list of actions.
     responses:
       200:
         body:
@@ -580,78 +563,54 @@ traits:
             example: |
               [
                 {
-                  "id": "54d8ae163fd303634505c81a4",
-                  "shortname": "Panne",
-                  "description": "Panne du matériel public"
+                    "id": "54e74d7aef63f4be494c3e8c",
+                    "type": "addComment",
+                    "content": {
+                        "author": "54e74d7aef63f4be494c3e76",
+                        "comment": "Ut sagittis ipsum sed nisl ultrices rutrum."
+                    },
+                    "creatingDate": "2015-02-20T15:06:34.457Z"
                 },
                 {
-                  "id": "54d8aedsadfd30364605c81a9",
-                  "shortname": "Casse",
-                  "description": "Matériel public cassé"
+                    "id": "54e74d7aef63f4be494c3e96",
+                    "type": "addTag",
+                    "content": "Non",
+                    "creatingDate": "2015-02-20T15:06:34.457Z"
+                },
+                {
+                    "id": "54ec73b460ce948754a3eadd",
+                    "type": "updateStaffmember",
+                    "content": {
+                        "newStaffmember": "54e74d7aef63f4be494c3e77"
+                    },
+                    "creatingDate": "2015-02-24T12:51:00.848Z"
+                },
+                {
+                    "id": "54ec73c860ce948754a3eade",
+                    "type": "updateStatus",
+                    "content": {
+                        "newStatus": "solved"
+                    },
+                    "creatingDate": "2015-02-24T12:51:20.285Z"
+                },
+                {
+                    "id": "54ef16adab00bf36047d1485",
+                    "issue": "54e74d7aef63f4be494c3eb6",
+                    "type": "addComment",
+                    "content": {
+                        "author": "54d8ae163fd11114605c81a4"
+                    },
+                    "creatingDate": "2015-02-26T12:50:53.287Z"
                 },
                 ...
               ]
-  post:
-    description: Create a new issueType.
-    body:
-      application/json:
-        example: |
-          {
-            "shortname": "Casse",
-            "description": "Matériel public cassé"    
-          }
-    responses:
-      201:
-        body:
-          application/json:
-            example: |
-              {
-                "id": "54d8aedsadfd30364605c81a9",
-                "shortname": "Casse",
-                "description": "Matériel public cassé"
-              }
-  /{id}:
-    get:
-      is: [auth: {roles: 'any'} ]
-      description: Retrieve a issueType by its id.
-      responses:
-        200:
-          body:
-            application/json:
-              example: |
-                {
-                  "id": "54d8ae163fd303634505c81a4",
-                  "shortname": "Panne",
-                  "description": "Panne du matériel public"
-                }     
-    put:
-      is: [auth: {roles: 'staff'} ]
-      description: |
-        Update a issueType specified by its id.
-        All parameters are updated, except the ID.
-        It's necessary to put all parameters to the body.
-      body:
-        application/json:
-          example: |
-            {
-              "shortname": "Panne",
-              "description": "Panne du matériel public"
-            }
-      responses:
-        200:
-          body:
-            application/json:
-              example: |
-                {
-                  "id": "54d8ae163fd303634505c81a4",
-                  "shortname": "Panne",
-                  "description": "Panne du matériel public"
-                }
-    delete:
-      is: [auth: {roles: 'staff'} ]
-      description: Delete a issueType specified by its id.
-      responses:
-        204:
-          body:
 
+/data:
+  description: Data resource.
+  /populate:
+    post:
+      description: Allow to populate random data to have a starting situation.
+      responses:
+        200:
+          body:
 
