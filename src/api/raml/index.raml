@@ -467,26 +467,29 @@ traits:
           There are three types of actions: addComment , addtag ​​, updateStatus and updateStaffmember.
         body:
           application/json:
-            example: |
+            example 1: |
               {
                 "type": "addComment",
                 "content":  {
                               "comment": "hello world", 
                               "author": "54d8ae163fd11114605c81a4"
                             }
-              },
+              }
+            example 2:
               {
                 "type": "addTag",
                 "content":  {
                               "tag": "great"
                             }
-              },
+              }
+            example 3: |
               {
                 "type": "updateStatus",
                 "content":  {
                               "newStatus": "solved"
                             }
-              },
+              }
+            example 4: |
               {
                 "type": "updateStaffmember",
                 "content":  {
