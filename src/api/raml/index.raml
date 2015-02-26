@@ -148,6 +148,7 @@ traits:
       Retrieve a list of issues. 
       The parameters that content as an Object receive the ID of this Object and not its content. 
       This service doesn't return the list of tags and comments. This is when calling a special Issue (by ID) that such informations is returned.
+      This service doesn't return closingDate parameter when it's empty.
     queryParameters:
       ps:
         displayName: ps
@@ -237,7 +238,6 @@ traits:
                     "status": "created",
                     "staffmember": "54d8ae163sadg7555781a4",
                     "creatingDate": "2014-08-20 15:30:00",
-                    "closingDate": "2014-09-20 15:30:00"
                   },
                   ...
                 ]
@@ -246,13 +246,13 @@ traits:
     description: |
       Create a new issue.
       The status is automatically "created " with the creation of the Issue and the staffmember is not assigned. 
-      An action " updateStaffmember " is available to associate a staffmember (issue/{id}/action/updateStaffmember).
+      An action " updateStaffmember " is available to associate a staffmember (issues/{id}/action/updateStaffmember).
     body:
       application/json:
         example: |
           {
             "author": "http://localhost/api/users/{id}",
-            "issueType": "http://localhost/api/issueType/{id}",
+            "issueType": "http://localhost/api/issuetypes/{id}",
             "description": "Lampadaire cassé",
             "latitude": "40,689249400000000000",
             "longitude": "-74,044500400000000000"
@@ -263,16 +263,29 @@ traits:
           application/json:
             example: |
               {
-                "id": "54d8ae163sadg7555781a4",
-                "author": "http://localhost/api/users/{id}",
-                "issueType": "http://localhost/api/issueType/{id}",
-                "description": "Lampadaire cassé",
-                "latitude": "40,689249400000000000",
-                "longitude": "-74,044500400000000000",
-                "status": "created",
-                "staffmember": "null",
-                "creatingDate": "2014-08-20 15:30:00",
-                "closingDate": "2014-09-20 15:30:00"
+                  "id": "54d8ae163sadg7555781a4",
+                  "author": {
+                      "id": "54e74d7aef63f4be494c3e77",
+                      "firstname": "Benoit",
+                      "lastname": "Dutoit",
+                      "phone": "+3386207",
+                      "roles": [
+                          "citizen",
+                          "staff"
+                      ]
+                  },
+                  "issueType": {
+                      "id": "54e74d7aef63f4be494c3e7f",
+                      "shortname": "dangerous crossroad",
+                      "description": "Morbi a odio cursus, finibus lorem ut, pellentesque elit."
+                  },
+                  "description": "Changement",
+                  "latitude": "40,689249400000000000",
+                  "longitude": "-74,044500400000000000",
+                  "status": "created",
+                  "comments": [],
+                  "tags": [],
+                  "creatingDate": "2015-02-26T12:34:52.925Z"
               }
 
   /{id}:
@@ -340,7 +353,7 @@ traits:
           example: |
             {
               "author": "http://localhost/api/users/{id}",
-              "issueType": "http://localhost/api/issueType/{id}",
+              "issueType": "http://localhost/api/issuetypes/{id}",
               "description": "Lampadaire non plus déféctueux mais araché par un jeune délinquant.",
               "latitude": "40,689249400000000000",
               "longitude": "-74,044500400000000000",
@@ -415,7 +428,6 @@ traits:
                     [
                       {
                         "id": "54d8ae163fd30364605c81a4",
-                        issue: "54eed593e37a5bac120d29bd",
                         "type": "addComment",
                         "content":  {
                                       "comment": "hello world", 
@@ -425,7 +437,6 @@ traits:
                       },
                       {
                         "id": "54d8ae163fd30364605c81a4",
-                        issue: "54eed593e37a5bac120d29bd",
                         "type": "addTag",
                         "content":  {
                                       "tag": "great"
@@ -434,7 +445,6 @@ traits:
                       },
                       {
                         "id": "54d8ae163fd30364605c81a4",
-                        issue: "54eed593e37a5bac120d29bd",
                         "type": "updateStatus",
                         "content":  {
                                       "newStatus": "solved"
@@ -443,7 +453,6 @@ traits:
                       },
                       {
                         "id": "54d8ae163fd30364605c81a4",
-                        issue: "54eed593e37a5bac120d29bd",
                         "type": "updateStaffmember",
                         "content":  {
                                       "newStaffmember": "54d8ae163fd11114605c81a4"
@@ -453,17 +462,39 @@ traits:
                       ...
                     ]
       post:
-        description: Create an action for an issue.
+        description: |
+        Create an action for an issue.
+        There are three types of actions: addComment , addtag ​​, updateStatus and updateStaffmember.
         body:
           application/json:
             example: |
               {
                 "type": "addComment",
                 "content":  {
-                              "attribut1": "contenu1", 
-                              "attribut2": "contenu2", 
-                              ..
-                            },
+                              "comment": "hello world", 
+                              "author": "54d8ae163fd11114605c81a4"
+                            }
+              }
+            example: |
+              {
+                "type": "addTag",
+                "content":  {
+                              "tag": "great"
+                            }
+              }
+            example: |
+              {
+                "type": "updateStatus",
+                "content":  {
+                              "newStatus": "solved"
+                            }
+              }
+            example: |
+              {
+                "type": "updateStaffmember",
+                "content":  {
+                              "newStaffmember": "54d8ae163fd11114605c81a4"
+                            }
               }
         responses:
           201:
@@ -471,14 +502,54 @@ traits:
               application/json:
                 example: |
                   {
-                    "id": "54d8ae163fd30364605c81a4",
-                    "type": "addComment",
-                    "content":  {
-                                  "attribut1": "contenu1", 
-                                  "attribut2": "contenu2", 
-                                  ..
-                                },
-                    "creatingDate": "2014-08-20 15:30:00"
+                      "id": "54e74d7aef63f4be494c3eae",
+                      "author": {
+                          "id": "54e74d7aef63f4be494c3e6a",
+                          "firstname": "Alfred",
+                          "lastname": "Ducroc",
+                          "phone": "+5825041",
+                          "roles": [
+                              "citizen"
+                          ]
+                      },
+                      "issueType": {
+                          "id": "54e74d7aef63f4be494c3e81",
+                          "shortname": "graffiti",
+                          "description": "Proin ac mi et turpis volutpat facilisis id eget est."
+                      },
+                      "description": "Sed eget ipsum sit amet lacus dictum porttitor at facilisis velit.",
+                      "latitude": "49.784234",
+                      "longitude": "8.622009",
+                      "status": "solved",
+                      "staffmember": {
+                          "id": "54e74d7aef63f4be494c3e77",
+                          "firstname": "Benoit",
+                          "lastname": "Dutoit",
+                          "phone": "+3386207",
+                          "roles": [
+                              "citizen",
+                              "staff"
+                          ]
+                      },
+                      "comments": [
+                          {
+                              "id": "54e74d7aef63f4be494c3e82",
+                              "date": "2015-02-20T15:06:34.445Z",
+                              "author": "54e74d7aef63f4be494c3e76",
+                              "comment": "Sed id ligula semper, auctor metus et, mattis tortor."
+                          },
+                          {
+                              "id": "54ef1c8280d7c16b0441f89b",
+                              "date": "2015-02-26T13:15:46.424Z",
+                              "author": "54d8ae163fd11114605c81a4",
+                              "comment": "Réalisation des tests OK"
+                          }
+                      ],
+                      "tags": [
+                          "Lobortis",
+                          "great"
+                      ],
+                      "creatingDate": "2015-02-20T15:06:34.481Z"
                   }
 
 /issueType:
@@ -598,24 +669,44 @@ traits:
             example: |
               [
                 {
-                  "id": "54d8ae163fd30364605c81a4",
-                  "type": "addComment",
-                  "content":  {
-                                "attribut1": "contenu1", 
-                                "attribut2": "contenu2", 
-                                ..
-                              },
-                  "creatingDate": "2014-08-20 15:30:00"
+                    "id": "54e74d7aef63f4be494c3e8c",
+                    "type": "addComment",
+                    "content": {
+                        "author": "54e74d7aef63f4be494c3e76",
+                        "comment": "Ut sagittis ipsum sed nisl ultrices rutrum."
+                    },
+                    "creatingDate": "2015-02-20T15:06:34.457Z"
                 },
                 {
-                  "id": "54d8ae163fd30364605c81a4",
-                  "type": "addTag",
-                  "content":  {
-                                "attribut1": "contenu1", 
-                                "attribut2": "contenu2", 
-                                ..
-                              },
-                  "creatingDate": "2014-08-20 15:40:00"
+                    "id": "54e74d7aef63f4be494c3e96",
+                    "type": "addTag",
+                    "content": "Non",
+                    "creatingDate": "2015-02-20T15:06:34.457Z"
+                },
+                {
+                    "id": "54ec73b460ce948754a3eadd",
+                    "type": "updateStaffmember",
+                    "content": {
+                        "newStaffmember": "54e74d7aef63f4be494c3e77"
+                    },
+                    "creatingDate": "2015-02-24T12:51:00.848Z"
+                },
+                {
+                    "id": "54ec73c860ce948754a3eade",
+                    "type": "updateStatus",
+                    "content": {
+                        "newStatus": "solved"
+                    },
+                    "creatingDate": "2015-02-24T12:51:20.285Z"
+                },
+                {
+                    "id": "54ef16adab00bf36047d1485",
+                    "issue": "54e74d7aef63f4be494c3eb6",
+                    "type": "addComment",
+                    "content": {
+                        "author": "54d8ae163fd11114605c81a4"
+                    },
+                    "creatingDate": "2015-02-26T12:50:53.287Z"
                 },
                 ...
               ]
