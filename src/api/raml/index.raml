@@ -288,6 +288,133 @@ traits:
                   "creatingDate": "2015-02-26T12:34:52.925Z"
               }
 
+  /{id}:
+    get:
+      is: [auth: {roles: 'any'} ]
+      description: |
+        Retrieve an issue specified by its id.
+        This service returns all the Issue parameters, except closingDate if it hasn't been defined.
+        For all parameters that contain an object, the whole object is returned.
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                {
+                  "id": "54e74d7aef63f4be494c3eb6",
+                  "author": {
+                      "id": "54e74d7aef63f4be494c3e70",
+                      "firstname": "Alain",
+                      "lastname": "Dutoit",
+                      "phone": "+7634763",
+                      "roles": [
+                          "staff"
+                      ]
+                  },
+                  "issueType": {
+                      "id": "54e74d7aef63f4be494c3e7a",
+                      "shortname": "dangerous population",
+                      "description": "Nam semper ligula quis nisl egestas, at pellentesque nunc tincidunt."
+                  },
+                  "description": "Nam semper ligula quis nisl egestas, at pellentesque nunc tincidunt.",
+                  "latitude": "48.784234",
+                  "longitude": "7.622009",
+                  "status": "acknowledged",
+                  "staffmember": {
+                      "id": "54e74d7aef63f4be494c3e70",
+                      "firstname": "Alain",
+                      "lastname": "Dutoit",
+                      "phone": "+7634763",
+                      "roles": [
+                          "staff"
+                      ]
+                  },
+                  "comments": [
+                      {
+                          "id": "54e74d7aef63f4be494c3e89",
+                          "date": "2015-02-25T13:57:31.205Z",
+                          "author": "54e74d7aef63f4be494c3e77",
+                          "comment": "Nunc sollicitudin lorem at dolor placerat, eget ornare erat fringilla."
+                      }
+                  ],
+                  "tags": [
+                      "Orci"
+                  ],
+                  "creatingDate": "2015-02-20T15:06:34.481Z"
+                }
+    put:
+      is: [auth: {roles: 'staff'} ]
+      description: |
+        Update an issue specified by its id.
+        All parameters are updated, except the ID, comments, tags and creatingDate.
+        It's necessary to put all parameters to the body .
+      body:
+        application/json:
+          example: |
+            {
+              "author": "http://localhost/api/users/{id}",
+              "issueType": "http://localhost/api/issuetypes/{id}",
+              "description": "Lampadaire non plus déféctueux mais araché par un jeune délinquant.",
+              "latitude": "40,689249400000000000",
+              "longitude": "-74,044500400000000000",
+              "status": "created",
+              "staffmember": "http://localhost/api/users/{id}",
+              "closingDate": "2014-09-20 15:30:00"
+            }
+      responses:
+        200:
+          body: 
+            application/json:
+              example: |
+                {
+                  "id": "54d8ae163sadg7555781a4",
+                  "author": {
+                      "id": "54e74d7aef63f4be494c3e70",
+                      "firstname": "Alain",
+                      "lastname": "Dutoit",
+                      "phone": "+7634763",
+                      "roles": [
+                          "staff"
+                      ]
+                  },
+                  "issueType": {
+                      "id": "54e74d7aef63f4be494c3e7a",
+                      "shortname": "dangerous population",
+                      "description": "Nam semper ligula quis nisl egestas, at pellentesque nunc tincidunt."
+                  },
+                  "description": "Lampadaire non plus déféctueux mais araché par un jeune délinquant.",
+                  "latitude": "40,689249400000000000",
+                  "longitude": "-74,044500400000000000",
+                  "status": "created",
+                  "staffmember": {
+                      "id": "54e74d7aef63f4be494c3e70",
+                      "firstname": "Alain",
+                      "lastname": "Dutoit",
+                      "phone": "+7634763",
+                      "roles": [
+                          "staff"
+                      ]
+                  },
+                  "comments": [
+                      {
+                          "id": "54e74d7aef63f4be494c3e89",
+                          "date": "2015-02-25T13:57:31.205Z",
+                          "author": "54e74d7aef63f4be494c3e77",
+                          "comment": "Nunc sollicitudin lorem at dolor placerat, eget ornare erat fringilla."
+                      }
+                  ],
+                  "tags": [
+                      "Orci"
+                  ],
+                  "creatingDate": "2014-08-20 15:30:00",
+                  "closingDate": "2014-09-20 15:30:00"
+                }
+    delete:
+      is: [auth: {roles: 'staff'} ]
+      description: Delete an issue specified by its id.
+      responses:
+        204:
+          body:
 
 /issueType:
   description: IssueType resource.
