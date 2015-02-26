@@ -721,7 +721,11 @@ traits:
   description: Data resource.
   /populate:
     post:
-      description: Allow to populate random data to have a starting situation.
+      description: |
+        Allow to populate random data to have a starting situation.
+        This service allows you to populate the database to perform the tests more quickly.
+        Filled tables are (User, Issue, IssueType, Action, Comment) .
+        Be careful because the links on objects are randomly inserted without guarantee of integrity . Only data inserted via the webservice can ensure his proper operation.
       responses:
         200:
           body:
