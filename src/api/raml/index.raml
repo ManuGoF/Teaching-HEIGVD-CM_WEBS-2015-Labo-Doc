@@ -467,7 +467,11 @@ traits:
         There are three types of actions: addComment , addtag ​​, updateStatus and updateStaffmember.
         body:
           application/json:
-            example: 
+            example: |
+              {
+                "shortname": "Casse",
+                "description": "Matériel public cassé"    
+              }
         responses:
           201:
             body:
