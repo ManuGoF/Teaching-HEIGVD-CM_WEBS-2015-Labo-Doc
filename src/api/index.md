@@ -30,21 +30,6 @@ Find below a quick summary of how HTTP verbs are used in the API:
 
 `HEAD` and `PATCH` are not currently used.
 
-### Authentication
-
-To interact with the API, your client will need to be authenticated for few resources. This is done by using the **x-user-id** header with the user id of the client and gives something that looks like:
-
-	x-user-id: <id>
-
-### Authorizations
-
-| Role      | Description |
-|-----------|--------
-| `any`     | Authenticated user is enough.
-| `various` | Complex authorization scheme detailed directly in the resource.
-| `citizen` | Any user with citizen role.
-| `staff`   | Any user with staff role.
-
 ### Errors
 
 The errors are not properly handled at the moment. Do not try to have errors!

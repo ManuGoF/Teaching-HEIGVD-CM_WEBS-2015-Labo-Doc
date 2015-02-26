@@ -191,6 +191,24 @@ traits:
         description: filtering by solved issue
         example: issues?solved=true
         required: false
+      lat:
+        displayName: lat
+        type: string
+        description: latitude of the center of the point of a zone (both lat long and radius are required to filter by zone)
+        example: issues?lat=46.3839140&long=6.2446560&radius=5000
+        required: false
+      long:
+        displayName: long
+        type: string
+        description: longitude of the center of the point of a zone (both lat long and radius are required to filter by zone)
+        example: issues?lat=46.3839140&long=6.2446560&radius=5000
+        required: false
+      radius:
+        displayName: radius
+        type: string
+        description: radius of a zone in meters (both lat long and radius are required to filter by zone)
+        example: issues?lat=46.3839140&long=6.2446560&radius=5000
+        required: false
     responses:
       200:
           body:
@@ -397,6 +415,7 @@ traits:
                     [
                       {
                         "id": "54d8ae163fd30364605c81a4",
+                        issue: "54eed593e37a5bac120d29bd",
                         "type": "addComment",
                         "content":  {
                                       "comment": "hello world", 
@@ -406,6 +425,7 @@ traits:
                       },
                       {
                         "id": "54d8ae163fd30364605c81a4",
+                        issue: "54eed593e37a5bac120d29bd",
                         "type": "addTag",
                         "content":  {
                                       "tag": "great"
@@ -414,6 +434,7 @@ traits:
                       },
                       {
                         "id": "54d8ae163fd30364605c81a4",
+                        issue: "54eed593e37a5bac120d29bd",
                         "type": "updateStatus",
                         "content":  {
                                       "newStatus": "solved"
@@ -422,6 +443,7 @@ traits:
                       },
                       {
                         "id": "54d8ae163fd30364605c81a4",
+                        issue: "54eed593e37a5bac120d29bd",
                         "type": "updateStaffmember",
                         "content":  {
                                       "newStaffmember": "54d8ae163fd11114605c81a4"

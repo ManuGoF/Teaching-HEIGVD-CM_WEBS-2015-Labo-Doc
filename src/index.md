@@ -1,5 +1,5 @@
 ---
-title: Welcome
+title: Bienvenue
 template: layout.jade
 menuIndex: 1
 ---
@@ -8,9 +8,9 @@ menuIndex: 1
 
 ## Citizen Engagement
 
-Cette API a été développée dans le cadre d'un cours de Webservices dispensé aux futurs Ingénieurs des Médias de la Haute Ecole d'Ingénierie et de Gestion du Canton de Vaud ([HEIG-VD](http://www.heig-vd.ch/)). 
+Cette API a été développée dans le cadre d'un cours de Webservices dispensé aux futurs Ingénieurs des Médias de la Haute École d'Ingénierie et de Gestion du Canton de Vaud ([HEIG-VD](http://www.heig-vd.ch/)). 
 
-Pour y parvenir, nous avons suivi un cahier des charges mis à disposition et qui peut être consulté, en tout temps, sur ce [blog](http://www.iflux.io/blog). Le but de ce projet est d'encourager le citoyen à s'impliquer dans la communauté en signalant des problèmes qu'il pourrait constater dans la vie de tous les jours. Ainsi, il pourra contribuer au bien-être de la société en permettant aux services compétents de traîter les problèmes dans les meilleurs délais.
+Pour y parvenir, nous avons suivi un cahier des charges mis à disposition et qui peut être consulté, en tout temps, sur ce [blog](http://www.iflux.io/blog). Le but de ce projet est d'encourager les citoyens à s'impliquer dans la communauté en signalant des problèmes qu'ils pourraient constater dans la vie de tous les jours. Ainsi, ils pourront contribuer au bien-être de la société en permettant aux services compétents de traîter les problèmes dans les meilleurs délais.
 
 Le développement de l'API ne représente, en réalité que la première partie du projet. Nous allons effectivement nous servir de des données fournies par le service mis en place pour développer une application mobile à l'attention des citoyens. N'hésitez donc pas à consulter régulièrement notre [blog](/blog) pour avoir des information sur l'avancement de notre projet.
 
