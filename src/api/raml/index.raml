@@ -425,42 +425,40 @@ traits:
               body:
                 application/json:
                   example: |
-                    [
-                      {
-                        "id": "54d8ae163fd30364605c81a4",
-                        "type": "addComment",
-                        "content":  {
-                                      "comment": "hello world", 
-                                      "author": "54d8ae163fd11114605c81a4"
-                                    },
-                        "creatingDate": "2014-08-20 15:30:00"
-                      },
-                      {
-                        "id": "54d8ae163fd30364605c81a4",
-                        "type": "addTag",
-                        "content":  {
-                                      "tag": "great"
-                                    },
-                        "creatingDate": "2014-08-20 15:40:00"
-                      },
-                      {
-                        "id": "54d8ae163fd30364605c81a4",
-                        "type": "updateStatus",
-                        "content":  {
-                                      "newStatus": "solved"
-                                    },
-                        "creatingDate": "2014-08-20 15:40:00"
-                      },
-                      {
-                        "id": "54d8ae163fd30364605c81a4",
-                        "type": "updateStaffmember",
-                        "content":  {
-                                      "newStaffmember": "54d8ae163fd11114605c81a4"
-                                    },
-                        "creatingDate": "2014-08-20 15:40:00"
-                      },
-                      ...
-                    ]
+                    {
+                      "id": "54d8ae163fd30364605c81a4",
+                      "type": "addComment",
+                      "content":  {
+                                    "comment": "hello world", 
+                                    "author": "54d8ae163fd11114605c81a4"
+                                  },
+                      "creatingDate": "2014-08-20 15:30:00"
+                    },
+                    {
+                      "id": "54d8ae163fd30364605c81a4",
+                      "type": "addTag",
+                      "content":  {
+                                    "tag": "great"
+                                  },
+                      "creatingDate": "2014-08-20 15:40:00"
+                    },
+                    {
+                      "id": "54d8ae163fd30364605c81a4",
+                      "type": "updateStatus",
+                      "content":  {
+                                    "newStatus": "solved"
+                                  },
+                      "creatingDate": "2014-08-20 15:40:00"
+                    },
+                    {
+                      "id": "54d8ae163fd30364605c81a4",
+                      "type": "updateStaffmember",
+                      "content":  {
+                                    "newStaffmember": "54d8ae163fd11114605c81a4"
+                                  },
+                      "creatingDate": "2014-08-20 15:40:00"
+                    },
+                    ...
       post:
         description: |
         Create an action for an issue.
