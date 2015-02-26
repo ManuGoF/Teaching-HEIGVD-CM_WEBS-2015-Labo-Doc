@@ -463,8 +463,8 @@ traits:
                     ]
       post:
         description: |
-        Create an action for an issue.
-        There are three types of actions: addComment , addtag ​​, updateStatus and updateStaffmember.
+          Create an action for an issue.
+          There are three types of actions: addComment , addtag ​​, updateStatus and updateStaffmember.
         body:
           application/json:
             example: |
@@ -493,7 +493,61 @@ traits:
                               "newStaffmember": "54d8ae163fd11114605c81a4"
                             }
               }
-
+        responses:
+          201:
+            body:
+              application/json:
+                example: |
+                  {
+                      "id": "54e74d7aef63f4be494c3eae",
+                      "author": {
+                          "id": "54e74d7aef63f4be494c3e6a",
+                          "firstname": "Alfred",
+                          "lastname": "Ducroc",
+                          "phone": "+5825041",
+                          "roles": [
+                              "citizen"
+                          ]
+                      },
+                      "issueType": {
+                          "id": "54e74d7aef63f4be494c3e81",
+                          "shortname": "graffiti",
+                          "description": "Proin ac mi et turpis volutpat facilisis id eget est."
+                      },
+                      "description": "Sed eget ipsum sit amet lacus dictum porttitor at facilisis velit.",
+                      "latitude": "49.784234",
+                      "longitude": "8.622009",
+                      "status": "solved",
+                      "staffmember": {
+                          "id": "54e74d7aef63f4be494c3e77",
+                          "firstname": "Benoit",
+                          "lastname": "Dutoit",
+                          "phone": "+3386207",
+                          "roles": [
+                              "citizen",
+                              "staff"
+                          ]
+                      },
+                      "comments": [
+                          {
+                              "id": "54e74d7aef63f4be494c3e82",
+                              "date": "2015-02-20T15:06:34.445Z",
+                              "author": "54e74d7aef63f4be494c3e76",
+                              "comment": "Sed id ligula semper, auctor metus et, mattis tortor."
+                          },
+                          {
+                              "id": "54ef1c8280d7c16b0441f89b",
+                              "date": "2015-02-26T13:15:46.424Z",
+                              "author": "54d8ae163fd11114605c81a4",
+                              "comment": "Réalisation des tests OK"
+                          }
+                      ],
+                      "tags": [
+                          "Lobortis",
+                          "great"
+                      ],
+                      "creatingDate": "2015-02-20T15:06:34.481Z"
+                  }
 
 /issueType:
   description: IssueType resource.
