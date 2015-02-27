@@ -14,6 +14,18 @@ traits:
   get:
     description: Retrieve a list of users.
     queryParameters:
+      ps:
+        displayName: ps
+        type: string
+        description: limit de number of results by page
+        example: issues?ps=1
+        required: false
+      p:
+        displayName: p
+        type: string
+        description: go to the page
+        example: issues?p=8
+        required: false
       search:
         displayName: search
         type: string
@@ -554,6 +566,18 @@ traits:
   get:
     description: Retrieve a list of issueTypes.
     queryParameters:
+      ps:
+        displayName: ps
+        type: string
+        description: limit de number of results by page
+        example: issues?ps=1
+        required: false
+      p:
+        displayName: p
+        type: string
+        description: go to the page
+        example: issues?p=8
+        required: false
       search:
         displayName: search
         type: string
@@ -662,6 +686,7 @@ traits:
               [
                 {
                     "id": "54e74d7aef63f4be494c3e8c",
+                    "issue": "54eed593e37a5bac120d29bc",
                     "type": "addComment",
                     "content": {
                         "author": "54e74d7aef63f4be494c3e76",
@@ -671,12 +696,14 @@ traits:
                 },
                 {
                     "id": "54e74d7aef63f4be494c3e96",
+                    "issue": "54eed593e37a5bac120d29bc",
                     "type": "addTag",
                     "content": "Non",
                     "creatingDate": "2015-02-20T15:06:34.457Z"
                 },
                 {
                     "id": "54ec73b460ce948754a3eadd",
+                    "issue": "54eed593e37a5bac120d29bc",
                     "type": "updateStaffmember",
                     "content": {
                         "newStaffmember": "54e74d7aef63f4be494c3e77"
@@ -685,6 +712,7 @@ traits:
                 },
                 {
                     "id": "54ec73c860ce948754a3eade",
+                    "issue": "54eed593e37a5bac120d29bc",
                     "type": "updateStatus",
                     "content": {
                         "newStatus": "solved"
