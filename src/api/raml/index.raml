@@ -12,7 +12,6 @@ traits:
 /users:
   description: User resource.
   get:
-    is: [auth: { roles: 'staff' }]
     description: Retrieve a list of users.
     queryParameters:
       search:
@@ -89,7 +88,6 @@ traits:
               }
   /{id}:
     get:
-      is: [auth: {roles: 'any'} ]
       description: Retrieve a user by its id.
       responses:
         200:
@@ -106,7 +104,6 @@ traits:
                   ]
                 }     
     put:
-      is: [auth: {roles: 'staff'} ]
       description: Update a user specified by its id.
       body:
         application/json:
@@ -134,7 +131,6 @@ traits:
                   ]
                 }
     delete:
-      is: [auth: {roles: 'staff'} ]
       description: Delete a user specified by its id.
       responses:
         204:
@@ -143,7 +139,6 @@ traits:
 /issues:
   description: Issue resource.
   get:
-    is: [auth: { roles: 'staff' }]
     description: |
       Retrieve a list of issues. 
       The parameters that content as an Object receive the ID of this Object and not its content. 
@@ -290,7 +285,6 @@ traits:
 
   /{id}:
     get:
-      is: [auth: {roles: 'any'} ]
       description: |
         Retrieve an issue specified by its id.
         This service returns all the Issue parameters, except closingDate if it hasn't been defined.
@@ -409,7 +403,6 @@ traits:
                   "closingDate": "2014-09-20 15:30:00"
                 }
     delete:
-      is: [auth: {roles: 'staff'} ]
       description: Delete an issue specified by its id.
       responses:
         204:
@@ -417,7 +410,6 @@ traits:
 
     /actions:
       get:
-        is: [auth: { roles: 'staff' }]
         description: Retrieve a list of actions specified by an issue.
         responses:
           200:
@@ -560,7 +552,6 @@ traits:
 /issuetypes:
   description: IssueType resource.
   get:
-    is: [auth: { roles: 'staff' }]
     description: Retrieve a list of issueTypes.
     queryParameters:
       search:
@@ -620,7 +611,6 @@ traits:
               }
   /{id}:
     get:
-      is: [auth: {roles: 'any'} ]
       description: Retrieve a issueType by its id.
       responses:
         200:
@@ -633,7 +623,6 @@ traits:
                   "description": "Panne du matériel public"
                 }     
     put:
-      is: [auth: {roles: 'staff'} ]
       description: |
         Update a issueType specified by its id.
         All parameters are updated, except the ID.
@@ -656,7 +645,6 @@ traits:
                   "description": "Panne du matériel public"
                 }
     delete:
-      is: [auth: {roles: 'staff'} ]
       description: Delete a issueType specified by its id.
       responses:
         204:
@@ -665,7 +653,6 @@ traits:
 /actions:
   description: Actions resource
   get:
-    is: [auth: { roles: 'staff' }]
     description: Retrieve a list of actions.
     responses:
       200:
