@@ -14,25 +14,6 @@ traits:
   get:
     is: [auth: { roles: 'staff' }]
     description: Retrieve a list of users.
-    queryParameters:
-      search:
-        displayName: search
-        type: string
-        description: Searching a word into the content of his parameters. 
-        example: users?search=Thomas
-        required: false
-      order:
-        displayName: order
-        type: string
-        description: List ordering (ASC/DESC)
-        example: users?order=ASC
-        required: false
-      by:
-        displayName: by
-        type: string
-        description: Ordering by parameter
-        example: users?by=firstname
-        required: false
     responses:
       200:
         body:
