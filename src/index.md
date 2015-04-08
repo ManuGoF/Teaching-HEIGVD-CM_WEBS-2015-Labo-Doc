@@ -16,4 +16,4 @@ Le développement de l'API ne représentait, en réalité que la première parti
 
 Si vous désirez vous faire une idée plus précise sur le fonctionnement de l'application, nous vous conseillons de regarder le webcast de présentation réalisé par nos soins. Nous espérons que vous aurez autant de plaisir à utiliser l'application que nous en avons eu à la développer. Finalement, n'hésitez pas à nous faire parvenir vos impressions sur notre application, elle serviront à rendre notre service encore plus adapté à vos besoins.
 
-![alt tag](http://ehdatheyat.ae/wp-content/uploads/2014/05/clout_illustration_2-01.jpg)
+![alt tag](img/banner.jpg)
