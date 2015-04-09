@@ -16,4 +16,6 @@ Le développement de l'API ne représentait, en réalité que la première parti
 
 Si vous désirez vous faire une idée plus précise sur le fonctionnement de l'application, nous vous conseillons de regarder le webcast de présentation réalisé par nos soins. Nous espérons que vous aurez autant de plaisir à utiliser l'application que nous en avons eu à la développer. Finalement, n'hésitez pas à nous faire parvenir vos impressions sur notre application, elle serviront à rendre notre service encore plus adapté à vos besoins.
 
+<iframe width="847" height="560" src="https://www.youtube.com/embed/Mu0KJCyIjf0" frameborder="0" allowfullscreen></iframe>
+
 ![alt tag](img/banner.jpg)
